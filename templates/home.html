@@ -1,6 +1,18 @@
 <html>
+<head>
+    <title>To-Do</title>
+</head>
+<body>
+    <input id="id_new_item" placeholder="Enter Your To-DO item">
+    <table id="id_list_table">
+    </table>
 
-<title>To-Do</title>
+</body>
+<form method="post" action="">
+    {% csrf_token %}
 
+    <input type="text" name="my_input">
+    <button type="submit">save</button>
+</form>
 
 </html>

@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.urls import resolve
 from lists.views import home_page
-from django.http import HttpRequest
+from django.http import HttpRequest,HttpResponse
 from django.test import Client
-
+from lists.models import Item
 
 class HomePageTest(TestCase):
     def test_root_url_resolves_to_home_page_view(self):
@@ -20,6 +20,16 @@ class HomePageTest(TestCase):
         self.assertTrue(html.endswith,'</html>')
         self.assertTrue(html.strip().endswith('</html>'))
 
+    def test_home_url(self):
+        my_c = self.client.get('/')
+        self.assertEqual(my_c.status_code,200)
+
+    def test_obj_and_save(self):
+        response=self.client.post('/',data={'my_input':'This test Text'})
+        self.assertEqual(Item.objects.count(),1)
+        get_item = Item.objects.last()
+        self.assertEqual(get_item.text,'This test Text')
+        self.assertEqual(response['location'], '/')
 
 class UrlTest(TestCase):
     def setUp(self) -> None:
