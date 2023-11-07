@@ -7,7 +7,7 @@ app_name='lists'
 
 urlpatterns = [
     path('',views.home_page,name='index'),
-    path('ali/',views.home_number2,name='home_number2')
+    path('listview/',views.list_view,name='listview')
 ]
 
 
